@@ -21,7 +21,7 @@
         #endregion
 
         #region Error Message
-        public const string ERROR_DATA_NOT_FOUND = "Data can't be found in the System or Database";
+        public const string ERROR_DATA_NOT_FOUND = "Data NOT found in the System or Database";
         public const string ERROR_INVALID_FUNCTIONID = "Invalid FunctionId";
         public const string ERROR_INVALID_OBJECTS = "The 2 object type doesn't match";
         #endregion

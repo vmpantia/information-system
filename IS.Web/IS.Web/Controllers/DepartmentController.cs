@@ -1,4 +1,4 @@
-﻿ using IS.Web.Contractor;
+﻿using IS.Web.Contractors;
 using IS.Web.DataAccess;
 using IS.Web.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -7,16 +7,10 @@ namespace IS.Web.Controllers
 {
     public class DepartmentController : Controller
     {
-        private readonly IBaseRepository<Department> _department;
-        private readonly IBaseRepository<Department_TRN> _transaction;
-        private readonly IBaseRepository<Request> _request;
-        public DepartmentController(IBaseRepository<Department> departmentRepository,
-                                    IBaseRepository<Department_TRN> transactionRepository,
-                                    IBaseRepository<Request> requestRepository)
+        private readonly IDepartmentService _department;
+        public DepartmentController(IDepartmentService department)
         {
-            _department = departmentRepository;
-            _transaction = transactionRepository;
-            _request = requestRepository;
+            _department = department;
         }
 
         [HttpGet]
@@ -24,102 +18,51 @@ namespace IS.Web.Controllers
         {
             var model = new DepartmentListViewModel
             {
-                departments = await _department.GetAll()
+                departments = await _department.GetAllByFilterAsync(new FilterSetting())
             };
 
-            return View(model);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> View(Guid id)
-        {
-            var model = new DepartmentViewModel
-            {
-                newDepartment = await _department.Find(id),
-            };
             return View(model);
         }
 
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            var model = new DepartmentViewModel
-            {
-                FunctionID = Constants.FUNCTIONID_DEPARTMENT_ADD_ADMIN,
-                newDepartment = new Department()
-            };
+            var model = UtilityController.GetDepartmentViewModel(Constants.FUNCTIONID_DEPARTMENT_ADD_ADMIN);
             return View(model);
         }
 
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
-            var currentDepartment = await _department.Find(id);
-            var model = new DepartmentViewModel
-            { 
-                FunctionID = Constants.FUNCTIONID_DEPARTMENT_CHANGE_ADMIN,
-                newDepartment = currentDepartment
-            };
+            var department = await _department.FindOneAsync(id);
+            var model = UtilityController.GetDepartmentViewModel(Constants.FUNCTIONID_DEPARTMENT_CHANGE_ADMIN, department);
             return View(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> Save(DepartmentViewModel model)
         {
+            var clientInfo = new ClientInformation();
             var isCreate = model.FunctionID.Contains("A");
-            
-            if (!ModelState.IsValid)
-                return View((isCreate ? Constants.VIEW_DEPARTMENT_CREATE : Constants.VIEW_DEPARTMENT_EDIT), model);
-
-            var db = _department.Database;
-            using (var transaction = await db.BeginTransactionAsync())
+            try
             {
-                try
-                {
-                    await SaveAsync(model);
-                    await transaction.CommitAsync();
-                }
-                catch(Exception ex)
-                {
-                    await transaction.RollbackAsync();
-                    throw;
-                }
-            }
+                if (!ModelState.IsValid)
+                    return View((isCreate ? Constants.VIEW_DEPARTMENT_CREATE : Constants.VIEW_DEPARTMENT_EDIT), model);
 
+                await _department.SaveAsync(model, clientInfo);
+            }
+            catch (Exception ex)
+            {
+                var error = new ErrorViewModel
+                {
+                    Title = "Error in Saving Department",
+                    ErrorMessage = ex.Message
+                };
+                return View(error);
+            }
             return RedirectToAction(Constants.VIEW_DEPARTMENT_INDEX);
         }
 
-        private async Task SaveAsync(DepartmentViewModel model)
-        {
-
-            var clientInfo = new ClientInformation(); /*Get this from Session*/
-
-            //Generate Request
-            var req = await UtilityController.GenerateNewRequest(_request,
-                                                                 clientInfo.UserID,
-                                                                 model.FunctionID,
-                                                                 "A2");
-            switch (model.FunctionID)
-            {
-                case Constants.FUNCTIONID_DEPARTMENT_ADD_ADMIN:
-                    //Set New Guid and Created Date
-                    model.newDepartment.InternalID = Guid.NewGuid();
-                    model.newDepartment.CreatedDate = DateTime.Now;
-                    await _department.Insert(model.newDepartment);
-                    break;
-                case Constants.FUNCTIONID_DEPARTMENT_CHANGE_ADMIN:
-                    //Set Modified Date
-                    model.newDepartment.ModifiedDate = DateTime.Now;
-                    await _department.Update(model.newDepartment.InternalID, 
-                                             new { model.newDepartment.Name, 
-                                                   model.newDepartment.Manager_InternalID,
-                                                   model.newDepartment.ModifiedDate });
-                    break;
-            }
-            //Insert Request & Transaction
-            var trn = model.GetDepartment_TRN(req.RequestID);
-            await _transaction.Insert(trn);
-            await _request.Insert(req);
-        }
+        
     }
 }

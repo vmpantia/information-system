@@ -4,6 +4,6 @@ namespace IS.Web.Models
 {
     public class DepartmentListViewModel
     {
-        public IEnumerable<Department> departments { get; set; }
+        public IEnumerable<Department_MST> departments { get; set; }
     }
 }
