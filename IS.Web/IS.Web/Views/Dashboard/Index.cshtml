@@ -1,0 +1,77 @@
+﻿@model DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+
+<div class="container-fluid">
+    <div class="row mb-4">
+       <div class="cstm-page-title">
+           <i class="fa-solid fa-gauge"></i>
+           DASHBOARD
+       </div>
+    </div>
+    <div class="row">
+        @* Card for No of Request(s)*@
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+            <div class ="cstm-card cstm-card-darkblue">
+                <div class ="cstm-card-header">
+                    <i class="fa-solid fa-code-pull-request"></i>
+                    No. of Request(s)
+                </div>
+                <div class="cstm-card-body"> 
+                    <span>@Model.RequestCount</span>
+                </div>
+                <div class="cstm-card-footer"> 
+                    @Model.RequestLast
+                </div>
+            </div>
+        </div>
+        @* Card for No of Employee(s)*@
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+            <div class ="cstm-card cstm-card-green">
+                <div class ="cstm-card-header">
+                    <i class="fa-solid fa-user"></i>
+                    No. of Employee(s)
+                </div>
+                <div class="cstm-card-body"> 
+                    <span>@Model.EmployeeCount</span>
+                </div>
+                <div class="cstm-card-footer"> 
+                    @Model.EmployeeLast
+                </div>
+            </div>
+        </div>
+        @* Card for No of Department(s)*@
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+            <div class ="cstm-card cstm-card-red">
+                <div class ="cstm-card-header">
+                    <i class="fa-solid fa-building"></i>
+                    No. of Department(s)
+                </div>
+                <div class="cstm-card-body"> 
+                    <span>@Model.DepartmentCount</span>
+                </div>
+                <div class="cstm-card-footer"> 
+                    @Model.DepartmentLast
+                </div>
+            </div>
+        </div>
+        @* Card for No of Position(s)*@
+        <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+            <div class ="cstm-card cstm-card-blue">
+                <div class ="cstm-card-header">
+                    <i class="fa-solid fa-location-dot"></i>
+                    No. of Position(s)
+                </div>
+                <div class="cstm-card-body"> 
+                    <span>@Model.PositionCount</span>
+                </div>
+                <div class="cstm-card-footer"> 
+                    @Model.PositionLast
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
