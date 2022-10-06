@@ -44,7 +44,10 @@ namespace IS.Web.Services
                 try
                 {
                     //Insert Request
-                    var request = await _request.InsertAsync(_db, clientInfo.UserID, model.FunctionID, "A2");
+                    var request = await _request.InsertAsync(_db, 
+                                                             clientInfo.UserID, 
+                                                             model.FunctionID, 
+                                                             Constants.REQUEST_STATUS_COMPLETED);
 
                     switch (model.FunctionID)
                     {

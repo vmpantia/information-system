@@ -41,6 +41,8 @@ namespace IS.Web.Services
         private string GenerateNewRequestID(ISDbContext db)
         {
             var newRequestID = string.Empty;
+
+            //Get Last Request
             var lastRequest = db.Request_LST.Where(data => data.CreatedDate == Globals.EXEC_DATE)
                                             .OrderBy(data => data.RequestID)
                                             .ToList();

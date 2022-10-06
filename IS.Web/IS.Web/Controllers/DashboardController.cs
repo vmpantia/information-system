@@ -18,16 +18,13 @@ namespace IS.Web.Controllers
 
         public async Task<IActionResult> Index() 
         {
-            //var request = await _request.Last<DateTime>(sort => sort.CreatedDate);
-            //var department = await _department.Last<DateTime>(sort => sort.CreatedDate);
-
             var model = new DashboardViewModel
             {
                RequestCount = await _request.GetCountAsync(),
-               //RequestLast = request == null ? Constants.NA : request.CreatedDate.ToString(),
+               RequestLast = Constants.NA,
 
                DepartmentCount = await _department.GetCountAsync(),
-               //DepartmentLast = department == null ? Constants.NA : department.CreatedDate.ToString(),
+               DepartmentLast = Constants.NA
             };
 
             return View(model);

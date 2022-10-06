@@ -18,14 +18,17 @@
         <div class="cstm-divider-title">
             <span>DEPARTMENT INFORMATION</span>
         </div>
-        <div class="row mb-2">
-            <div class="col-12 col-md-4 mb-3 form-group">
-                <label asp-for="Name" class="form-label">* Department Name:</label>
+        <div class="row mb-3">
+            <div class="col-12 col-sm-8 col-lg-4 form-group">
+                <label asp-for="Name" class="form-label">Department Name:</label>
                 <input asp-for="Name" type="text" class="form-control" placeholder="Department Name" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="col-12 col-md-4 mb-3 form-group">
-                <label asp-for="Manager_InternalID" class="form-label">* Select Manager:</label>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-12 col-sm-8 col-lg-4 form-group">
+                <label asp-for="Manager_InternalID" class="form-label">Select Manager:</label>
                 <select asp-for="Manager_InternalID" class="form-select"
                         asp-items="@(new SelectList(Model.ManagerList, "Value", "Text"))">
                 </select>
@@ -33,7 +36,7 @@
             </div>
         </div>
 
-        <div class="row mb-2">
+        <div class="row mb-3">
             <div class="col-12">
                 <button type="submit" class="btn btn-success"><i class="fa-solid fa-floppy-disk"></i>&nbsp;Save</button>
                 <a asp-action="Index" class="btn btn-secondary"><i class="fa-solid fa-xmark"></i>&nbsp;Cancel</a>

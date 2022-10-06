@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace IS.Web.Models
 {
@@ -8,6 +9,8 @@ namespace IS.Web.Models
 
         //Department General Information
         public Guid InternalID { get; set; }
+        [Required]
+        [Display(Name = "Department Name")]
         public string Name { get; set; }
         public Guid Manager_InternalID { get; set; }
         public int Status { get; set; }

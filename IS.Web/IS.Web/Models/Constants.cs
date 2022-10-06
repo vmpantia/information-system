@@ -17,7 +17,7 @@
         #endregion
 
         #region Request Status
-        public const string REQUEST_STATUS_A2 = "A2";
+        public const string REQUEST_STATUS_COMPLETED = "A2";
         #endregion
 
         #region Error Message
@@ -64,7 +64,5 @@
         public const string FUNCTIONID_POSITION_CHANGE_ADMIN   = "02C01";
         public const string FUNCTIONID_POSITION_DELETE_ADMIN   = "02D01";
         #endregion
-
-
     }
 }
