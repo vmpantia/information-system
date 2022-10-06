@@ -21,7 +21,7 @@ export class ViewDepComponent implements OnInit {
   }
 
   refreshDepartmentList(){
-    this.service.getDepartmentList().subscribe(
+    this.service.GetDepartmentList().subscribe(
       data =>{
         this.DepartmentList=data;
       }

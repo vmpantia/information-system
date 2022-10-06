@@ -16,10 +16,11 @@ namespace IS.Api.Controllers
             _department = department;
         }
 
-        [HttpPost("GetDepartmentList")]
-        public async Task<JsonResult> GetDepartmentListAsync(FilterSetting settings)
+        [HttpGet("GetDepartmentList")]
+        public async Task<JsonResult> GetDepartmentListAsync()
         {
-            var result = await _department.GetDepartmentListAsync(settings);
+            var setting = new FilterSetting();
+            var result = await _department.GetDepartmentListAsync(setting);
             return new JsonResult(result);
         }
 
