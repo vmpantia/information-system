@@ -19,6 +19,6 @@ readonly APIUrl ="https://localhost:7193/api";
   }
 
   SaveDepartment(val:any){
-    return this.http.post(this.APIUrl+'/Department/SaveDepartment',val)
+    return this.http.post(this.APIUrl+'/Department/SaveDepartment',val);
   }
 }

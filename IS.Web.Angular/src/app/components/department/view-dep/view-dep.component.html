@@ -1,0 +1,88 @@
+<div class="container-fluid">
+    <div class="row mb-4">
+       <div class="cstm-page-title">
+           <i class="fa-solid fa-building"></i>
+           DEPARTMENT
+       </div>
+    </div>
+   
+    <div class="row mb-2">
+        <div class="col-8">
+            <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary btn-sm"
+                    data-toggle="modal" data-target="#departmentModal"
+                    (click)="AddClick()"
+                    data-backdrop="static" data-keyboard="false">
+                    Add Department
+            </button>
+        </div>
+        <div class="col-4">
+            <input type="text" class="form-control form-control-sm" placeholder="Search Department">
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="departmentModal" tabindex="-1" aria-labelledby="departmentModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="departmentModalLabel">{{modalTitle}}</h5>
+                <button type="button" class="close" 
+                        data-dismiss="modal" aria-label="Close" 
+                        (click)="CloseClick()"> 
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-add-edit-dep [depInfo]="depInfo" *ngIf="ActivateAddEditDepComp"></app-add-edit-dep>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Action</th>
+                    <th>Department</th>
+                    <th>Manager</th>
+                    <th>Status</th>
+                    <th>Created Date</th>
+                    <th>Modified Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of depList">
+
+                    <td>
+                        <button type="button" class="btn btn-warning btn-sm" 
+                                data-toggle="modal" data-target="#departmentModal"
+                                (click)="EditClick(data)"
+                                data-backdrop="static" data-keyboard="false">
+                                Edit
+                        </button> &nbsp;
+                        <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                    </td>
+
+                    <td>{{data.name}}</td>
+                    <td>{{data.manager_InternalID}}</td>
+
+                    <!-- Status Condition -->
+                    <ng-container *ngIf="data.status == 0;">
+                        <td><span class="badge bg-success">Enabled</span></td>
+                    </ng-container>
+                    <ng-container *ngIf="data.status == 1;">
+                        <td><span class="badge bg-secondary">Disabled</span></td>
+                    </ng-container>
+                    <ng-container *ngIf="data.status == 2;">
+                        <td><span class="badge bg-danger">Deletion</span></td>
+                    </ng-container>
+
+                    <td>{{data.createdDate | date:'yyyy-MM-dd'}}</td>
+                    <td>{{data.modifiedDate | date:'yyyy-MM-dd'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,9 +1,9 @@
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary float-right m-2" 
-data-toggle="modal" data-target="#exampleModal"
-(click)="addClick()"
-data-backdrop="static" data-keyboard="false">
-    Add Department
+        data-toggle="modal" data-target="#exampleModal"
+        (click)="addClick()"
+        data-backdrop="static" data-keyboard="false">
+        Add Department
 </button>
   
 <!-- Modal -->
@@ -13,8 +13,8 @@ data-backdrop="static" data-keyboard="false">
     <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">{{ModalTitle}}</h5>
         <button type="button" class="close" 
-        data-dismiss="modal" aria-label="Close" 
-        (click)="closeClick()">
+                data-dismiss="modal" aria-label="Close" 
+                (click)="closeClick()"> 
         <span aria-hidden="true">&times;</span>
         </button>
     </div>
@@ -29,7 +29,7 @@ data-backdrop="static" data-keyboard="false">
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>DepartmentID</th>
+            <th>Internal ID</th>
             <th>Department Name</th>
             <th>Status</th>
             <th>Action</th>
@@ -37,11 +37,16 @@ data-backdrop="static" data-keyboard="false">
     </thead>
     <tbody>
         <tr *ngFor="let dataItem of DepartmentList">
-            <td>{{dataItem.DepartmentID}}</td>
-            <td>{{dataItem.DepartmentName}}</td>
-            <td>{{dataItem.Status}}</td>
+            <td>{{dataItem.internalID}}</td>
+            <td>{{dataItem.name}}</td>
+            <td>{{dataItem.status}}</td>
             <td>
-                <button type="button" class="btn btn-light mr-1">Edit</button>
+                <button type="button" class="btn btn-light mr-1" 
+                        data-toggle="modal" data-target="#exampleModal"
+                        (click)="editClick(dataItem)"
+                        data-backdrop="static" data-keyboard="false">
+                        Edit
+                </button>
                 <button type="button" class="btn btn-light mr-1">Delete</button>
             </td>
         </tr>

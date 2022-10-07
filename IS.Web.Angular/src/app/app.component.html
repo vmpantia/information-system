@@ -1,0 +1,32 @@
+<header>
+  <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+      <div class="container-fluid">
+          <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Information System</a>
+      </div>
+  </nav>
+</header>
+
+<div class="cstm-container">
+  <div class="cstm-side-bar">
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a asp-controller="Dashboard" asp-action="Index"><i class="fa-solid fa-gauge"></i>Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a asp-controller="Dashboard" asp-action="Index"><i class="fa-solid fa-code-pull-request"></i>Request</a>
+        </li>
+        <li class="nav-item">
+          <a asp-controller="Dashboard" asp-action="Index"><i class="fa-solid fa-user"></i>Employee</a>
+        </li>
+        <li class="nav-item">
+          <a routerLink="department"><i class="fa-solid fa-building"></i>Department</a>
+        </li>
+        <li class="nav-item">
+          <a asp-controller="Dashboard" asp-action="Index"><i class="fa-solid fa-location-dot"></i>Position</a>
+        </li>
+      </ul>
+  </div>
+  <div class="cstm-content">
+      <router-outlet></router-outlet>
+  </div>
+</div>

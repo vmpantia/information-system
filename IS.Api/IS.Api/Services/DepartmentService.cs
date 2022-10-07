@@ -37,7 +37,7 @@ namespace IS.Web.Services
             return result;
         }
 
-        public async Task SaveDepartmentAsync(DepartmentRequestModel model)
+        public async Task<string> SaveDepartmentAsync(DepartmentRequestModel model)
         {
             using (var transaction = await _db.Database.BeginTransactionAsync())
             {
@@ -52,22 +52,20 @@ namespace IS.Web.Services
                     switch (model.FunctionID)
                     {
                         case Constants.FUNCTIONID_DEPARTMENT_ADD_ADMIN:
-                            //Set New Guid and Created Date
-                            model.InternalID = Guid.NewGuid();
-                            model.CreatedDate = Globals.EXEC_DATE;
+                            //Set New Guid
+                            model.department.InternalID = Guid.NewGuid();
                             await InsertAsync(model);
                             break;
                         case Constants.FUNCTIONID_DEPARTMENT_CHANGE_ADMIN:
-                            //Set Modified Date
-                            model.ModifiedDate = Globals.EXEC_DATE;
                             await UpdateAsync(model);
                             break;
                     }
 
                     //Insert Transaction
                     await InsertTransactionAsync(model, request.RequestID);
-
                     await transaction.CommitAsync();
+
+                    return request.RequestID;
                 }
                 catch (Exception ex)
                 {
@@ -81,11 +79,11 @@ namespace IS.Web.Services
         {
             var newDepartment = new Department_MST
             {
-                InternalID = model.InternalID,
-                Name = model.Name,
-                Manager_InternalID = model.Manager_InternalID,
-                Status = model.Status,
-                CreatedDate = model.CreatedDate,
+                InternalID = model.department.InternalID,
+                Name = model.department.Name,
+                Manager_InternalID = model.department.Manager_InternalID,
+                Status = model.department.Status,
+                CreatedDate = model.department.CreatedDate,
                 ModifiedDate = null,
             };
             await _db.Department_MST.AddAsync(newDepartment);
@@ -93,13 +91,13 @@ namespace IS.Web.Services
         }
         private async Task UpdateAsync(DepartmentRequestModel model)
         {
-            var result = await GetDepartmentByIDAsync(model.InternalID);
+            var result = await GetDepartmentByIDAsync(model.department.InternalID);
             _db.Entry(result).CurrentValues.SetValues(new
             {
-                model.Name,
-                model.Manager_InternalID,
-                model.Status,
-                model.ModifiedDate
+                model.department.Name,
+                model.department.Manager_InternalID,
+                model.department.Status,
+                model.department.ModifiedDate
             });
             await _db.SaveChangesAsync();
         }
@@ -108,12 +106,12 @@ namespace IS.Web.Services
             var newDepartment = new Department_TRN
             {
                 RequestID = RequestID,
-                InternalID = model.InternalID,
-                Name = model.Name,
-                Manager_InternalID = model.Manager_InternalID,
-                Status = model.Status,
-                CreatedDate = model.CreatedDate,
-                ModifiedDate = model.ModifiedDate,
+                InternalID = model.department.InternalID,
+                Name = model.department.Name,
+                Manager_InternalID = model.department.Manager_InternalID,
+                Status = model.department.Status,
+                CreatedDate = model.department.CreatedDate,
+                ModifiedDate = model.department.ModifiedDate,
             };
             await _db.Department_TRN.AddAsync(newDepartment);
             await _db.SaveChangesAsync();

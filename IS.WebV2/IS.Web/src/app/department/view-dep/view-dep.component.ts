@@ -28,6 +28,12 @@ export class ViewDepComponent implements OnInit {
     );
   }
 
+  editClick(item: any) {
+    this.dep=item;
+    this.ModalTitle="Edit Department";
+    this.ActivateAddEditDepComp=true;
+  }
+
   addClick(){
     this.dep={
       DepartmentID:0,

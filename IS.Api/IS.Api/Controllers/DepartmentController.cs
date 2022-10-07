@@ -32,9 +32,10 @@ namespace IS.Api.Controllers
         }
 
         [HttpPost("SaveDepartment")]
-        public async Task SaveDepartmentAsync(DepartmentRequestModel model)
+        public async Task<JsonResult> SaveDepartmentAsync(DepartmentRequestModel model)
         {
-            await _department.SaveDepartmentAsync(model);
+            var result = await _department.SaveDepartmentAsync(model);
+            return new JsonResult(result);
         }
     }
 }
