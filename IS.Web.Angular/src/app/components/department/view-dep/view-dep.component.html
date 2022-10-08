@@ -53,8 +53,23 @@
                 </tr>
             </thead>
             <tbody>
+                <tr *ngIf="errorMessage != null">
+                    <td colspan="6">
+                        <div class="cstm-no-record">
+                            <i class="fa-solid fa-trash"></i>No Record Found <br>
+                            <span>{{errorMessage}}</span>
+                        </div>
+                    </td>
+                </tr>
+                <tr *ngIf="depList?.length == 0">
+                    <td colspan="6">
+                        <div class="cstm-no-record">
+                            <i class="fa-solid fa-trash"></i>tae <br>
+                            <span>{{errorMessage}}</span>
+                        </div>
+                    </td>
+                </tr>
                 <tr *ngFor="let data of depList">
-
                     <td>
                         <button type="button" class="btn btn-warning btn-sm" 
                                 data-toggle="modal" data-target="#departmentModal"

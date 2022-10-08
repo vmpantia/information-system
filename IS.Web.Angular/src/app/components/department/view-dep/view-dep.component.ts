@@ -11,8 +11,9 @@ export class ViewDepComponent implements OnInit {
 
   constructor(private service:ApiService) { }
   
-  depList!:Department[];
+  depList!:any[];
   modalTitle!:string;
+  errorMessage!:string;
   depInfo!:Department;
   ActivateAddEditDepComp:boolean=false;
 
@@ -22,8 +23,11 @@ export class ViewDepComponent implements OnInit {
 
   RefreshDepartmentList(){
     this.service.GetDepartmentList().subscribe(
-      data => {
-        this.depList = data;
+      (resonse:any) => {
+        this.depList = resonse;
+      },
+      (err) => {
+        this.errorMessage = err.message
       }
     )
   }
