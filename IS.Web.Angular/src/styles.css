@@ -151,3 +151,7 @@
 .cstm-no-record i {
     padding-right: 5px;
 }
+
+input.invalid{
+    border: 1px solid red;
+}

@@ -1,9 +1,10 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { GlobalConstants } from 'src/app/common/globalconstants.model';
 import { Department } from 'src/app/models/department.model';
 import { DepartmentRequestModel } from 'src/app/models/requestmodels/departmentrequestmodel';
 import { ClientInformation } from 'src/app/models/clientinformation';
 import { ApiService } from 'src/app/services/api.service';
+import { DepartmentService } from 'src/app/services/department.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -13,14 +14,17 @@ import Swal from 'sweetalert2';
 })
 export class AddEditDepComponent implements OnInit {
 
-  constructor(private service:ApiService) { }
+  constructor(private apiService:ApiService,
+              private depService:DepartmentService) { }
 
-  @Input() depInfo!:Department;
-  
-  newDepInfo = new Department();
-  clientInfo = new ClientInformation();
+  @Input()depInfo:Department;
+  @Output()Reload = new EventEmitter();
 
   disableControl:boolean = false;
+  errorMessages = new Array();
+  
+  newDepInfo:Department = new Department();
+  clientInfo:ClientInformation = new ClientInformation();
 
   ngOnInit(): void {;
     this.newDepInfo.internalID = this.depInfo.internalID;
@@ -38,22 +42,29 @@ export class AddEditDepComponent implements OnInit {
     let functionID:string;
     let depReqModel = new DepartmentRequestModel();
 
-    if(this.newDepInfo.name == "" || this.newDepInfo.name == undefined)
+    //Check if the transaction is Add or Edit
+    let isNew = this.newDepInfo.internalID === GlobalConstants.EMPTY_GUID ? true : false;
+
+    //Set functionID based on Add or Edit
+    functionID = isNew ? GlobalConstants.FUNCTIONID_DEPARTMENT_ADD_ADMIN : GlobalConstants.FUNCTIONID_DEPARTMENT_CHANGE_ADMIN;
+
+    //Validate New Department Info
+    if(isNew)
+    {
+      this.newDepInfo.createdDate = new Date();
+      this.errorMessages = this.depService.ValidateDepartment(this.newDepInfo, isNew);
+    }
+    else
+    {
+      this.newDepInfo.modifiedDate = new Date();
+      this.errorMessages = this.depService.ValidateDepartment(this.newDepInfo, isNew, this.depInfo);
+    }
+    
+    //Check if there's a error
+    if(this.errorMessages.length > 0)
     {
       this.disableControl = false;
-      Swal.fire("Department Name",
-                "This field is required.",
-                "warning");
       return;
-    }
-
-    if(this.newDepInfo.internalID == undefined) {
-      functionID = GlobalConstants.FUNCTIONID_DEPARTMENT_ADD_ADMIN;
-      this.newDepInfo.createdDate = new Date();
-    }
-    else{
-      functionID = GlobalConstants.FUNCTIONID_DEPARTMENT_CHANGE_ADMIN;
-      this.newDepInfo.modifiedDate = new Date();
     }
 
     //Prepare Variables
@@ -67,21 +78,20 @@ export class AddEditDepComponent implements OnInit {
     depReqModel.client = this.clientInfo;
 
     //Save Department Request Model
-    this.service.SaveDepartment(depReqModel)
+    this.apiService.SaveDepartment(depReqModel)
     .subscribe(
       (reponse:any) => {
-        this.disableControl = false;
-        Swal.fire("Save Successfully",
-                  reponse + " is your Request ID for your transaction.",
-                  "success");
+        Swal.fire(GlobalConstants.SUCCESS_SAVE,
+                  reponse + GlobalConstants.SUCCESS_TRANSACTION,
+                  "success").then(res => {
+                    this.disableControl = false;
+                    this.Reload.emit();
+                  });
       },
       (err) => {
         this.disableControl = false;
-        Swal.fire("Error in Saving Department",
-                  err.message,
-                  "error");
+        this.errorMessages.push(GlobalConstants.ERROR_SAVING_DEPARTMENT)
       }
     )
-
   }
 }

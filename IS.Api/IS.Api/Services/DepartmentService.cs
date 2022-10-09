@@ -116,6 +116,5 @@ namespace IS.Web.Services
             await _db.Department_TRN.AddAsync(newDepartment);
             await _db.SaveChangesAsync();
         }
-
     }
 }

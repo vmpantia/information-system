@@ -11,8 +11,8 @@
             <!-- Button trigger modal -->
             <button type="button" class="btn btn-primary btn-sm"
                     data-toggle="modal" data-target="#departmentModal"
-                    (click)="AddClick()"
-                    data-backdrop="static" data-keyboard="false">
+                    data-backdrop="static" data-keyboard="false"
+                    (click)="AddDepartment()">
                     Add Department
             </button>
         </div>
@@ -29,12 +29,12 @@
                 <h5 class="modal-title" id="departmentModalLabel">{{modalTitle}}</h5>
                 <button type="button" class="close" 
                         data-dismiss="modal" aria-label="Close" 
-                        (click)="CloseClick()"> 
+                        (click)="CloseDepartmentForm()"> 
                 <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <app-add-edit-dep [depInfo]="depInfo" *ngIf="ActivateAddEditDepComp"></app-add-edit-dep>
+                <app-add-edit-dep [depInfo]="depInfo" *ngIf="depInfo" (Reload)="Reload()" ></app-add-edit-dep>
             </div>
             </div>
         </div>
@@ -56,7 +56,7 @@
                 <tr *ngIf="errorMessage != null">
                     <td colspan="6">
                         <div class="cstm-no-record">
-                            <i class="fa-solid fa-trash"></i>No Record Found <br>
+                            <i class="fa-solid fa-trash"></i>Error in getting Records from Database<br>
                             <span>{{errorMessage}}</span>
                         </div>
                     </td>
@@ -64,8 +64,7 @@
                 <tr *ngIf="depList?.length == 0">
                     <td colspan="6">
                         <div class="cstm-no-record">
-                            <i class="fa-solid fa-trash"></i>tae <br>
-                            <span>{{errorMessage}}</span>
+                            <i class="fa-solid fa-trash"></i>No Record Found<br>
                         </div>
                     </td>
                 </tr>
@@ -73,8 +72,8 @@
                     <td>
                         <button type="button" class="btn btn-warning btn-sm" 
                                 data-toggle="modal" data-target="#departmentModal"
-                                (click)="EditClick(data)"
-                                data-backdrop="static" data-keyboard="false">
+                                data-backdrop="static" data-keyboard="false"
+                                (click)="EditDepartment(data)">
                                 Edit
                         </button> &nbsp;
                         <button type="button" class="btn btn-danger btn-sm">Delete</button>

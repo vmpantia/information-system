@@ -9,49 +9,50 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class ViewDepComponent implements OnInit {
 
-  constructor(private service:ApiService) { }
+  constructor(public apiService:ApiService) { }
   
-  depList!:any[];
-  modalTitle!:string;
-  errorMessage!:string;
-  depInfo!:Department;
-  ActivateAddEditDepComp:boolean=false;
+  depList:Department[];
+  depInfo:Department;
+  errorMessage:string;
+
+  modalTitle:string;
 
   ngOnInit(): void {
     this.RefreshDepartmentList();
   }
 
   RefreshDepartmentList(){
-    this.service.GetDepartmentList().subscribe(
-      (resonse:any) => {
-        this.depList = resonse;
+    this.apiService.GetDepartmentList().subscribe(
+      (res:any) => {
+        this.depList = res;
       },
       (err) => {
         this.errorMessage = err.message
       }
     )
   }
-
-  EditClick(data:Department){
+  
+  EditDepartment(data:Department){
     this.modalTitle = "Edit Department";
-    this.ActivateAddEditDepComp = true;
     
     //Setup Edit Department Info
-    this.depInfo = data;
+    this.depInfo = Object.assign({}, data);
   } 
 
-  AddClick(){
+  AddDepartment(){
     this.modalTitle = "Add Department";
-    this.ActivateAddEditDepComp = true;
 
     //Setup Add Department Info
     this.depInfo = new Department();
   }
 
-  CloseClick(){
-    this.ActivateAddEditDepComp = false;
-    this.RefreshDepartmentList();
+  CloseDepartmentForm(){
+    this.Reload();
   }
 
+  Reload(){
+    window.location.reload();
+    this.depInfo = new Department();
+  }
 
 }
