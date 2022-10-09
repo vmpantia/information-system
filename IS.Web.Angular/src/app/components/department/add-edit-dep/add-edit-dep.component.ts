@@ -4,7 +4,7 @@ import { Department } from 'src/app/models/department.model';
 import { DepartmentRequestModel } from 'src/app/models/requestmodels/departmentrequestmodel';
 import { ClientInformation } from 'src/app/models/clientinformation';
 import { ApiService } from 'src/app/services/api.service';
-import { DepartmentService } from 'src/app/services/department.service';
+import { UtilityService } from 'src/app/services/utility.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -14,8 +14,8 @@ import Swal from 'sweetalert2';
 })
 export class AddEditDepComponent implements OnInit {
 
-  constructor(private apiService:ApiService,
-              private depService:DepartmentService) { }
+  constructor(private api:ApiService,
+              private utility:UtilityService) { }
 
   @Input()depInfo:Department;
   @Output()Reload = new EventEmitter();
@@ -52,12 +52,12 @@ export class AddEditDepComponent implements OnInit {
     if(isNew)
     {
       this.newDepInfo.createdDate = new Date();
-      this.errorMessages = this.depService.ValidateDepartment(this.newDepInfo, isNew);
+      this.errorMessages = this.utility.ValidateDepartment(this.newDepInfo, isNew);
     }
     else
     {
       this.newDepInfo.modifiedDate = new Date();
-      this.errorMessages = this.depService.ValidateDepartment(this.newDepInfo, isNew, this.depInfo);
+      this.errorMessages = this.utility.ValidateDepartment(this.newDepInfo, isNew, this.depInfo);
     }
     
     //Check if there's a error
@@ -78,15 +78,30 @@ export class AddEditDepComponent implements OnInit {
     depReqModel.client = this.clientInfo;
 
     //Save Department Request Model
-    this.apiService.SaveDepartment(depReqModel)
+    this.api.SaveDepartment(depReqModel)
     .subscribe(
-      (reponse:any) => {
-        Swal.fire(GlobalConstants.SUCCESS_SAVE,
-                  reponse + GlobalConstants.SUCCESS_TRANSACTION,
-                  "success").then(res => {
-                    this.disableControl = false;
-                    this.Reload.emit();
-                  });
+      (response:any) => {
+        Swal.fire({
+          title: GlobalConstants.CONFIRM_SAVE_DEPARTMENT_TITLE,
+          text: GlobalConstants.CONFIRM_SAVE_DEPARTMENT_TEXT,
+          icon: "warning",
+          confirmButtonText: "Yes",
+          confirmButtonColor: GlobalConstants.COLOR_BLUE,
+          showCancelButton: true,
+          cancelButtonColor: GlobalConstants.COLOR_RED
+        }).then((result) => {
+          if(result.isConfirmed){
+            Swal.fire( {
+              title: GlobalConstants.SUCCESS_SAVE_TRANSACTION_TITLE, 
+              text: response + GlobalConstants.SUCCESS_SAVE_TRANSACTION_TEXT,
+              icon: "success",
+              confirmButtonColor: GlobalConstants.COLOR_BLUE
+            }).then(() => {
+              this.Reload.emit();
+            });
+          }
+          this.disableControl = false;
+        })
       },
       (err) => {
         this.disableControl = false;

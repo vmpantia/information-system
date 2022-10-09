@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
+import Swal from 'sweetalert2';
 import { GlobalConstants } from '../common/globalconstants.model';
 import { Department } from '../models/department.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DepartmentService {
+export class UtilityService {
 
   constructor() { }
-
 
   ValidateDepartment(newDepInfo:Department, isNew:boolean, oldDepInfo:any = undefined):any
   {

@@ -9,7 +9,7 @@ import { ApiService } from 'src/app/services/api.service';
 })
 export class ViewDepComponent implements OnInit {
 
-  constructor(public apiService:ApiService) { }
+  constructor(public api:ApiService) { }
   
   depList:Department[];
   depInfo:Department;
@@ -22,9 +22,9 @@ export class ViewDepComponent implements OnInit {
   }
 
   RefreshDepartmentList(){
-    this.apiService.GetDepartmentList().subscribe(
+    this.api.GetDepartmentList().subscribe(
       (res:any) => {
-        this.depList = res;
+        this.depList = res as Department[]
       },
       (err) => {
         this.errorMessage = err.message
