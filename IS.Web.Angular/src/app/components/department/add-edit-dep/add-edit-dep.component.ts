@@ -105,7 +105,7 @@ export class AddEditDepComponent implements OnInit {
       },
       (err) => {
         this.disableControl = false;
-        this.errorMessages.push(GlobalConstants.ERROR_SAVING_DEPARTMENT)
+        this.errorMessages.push(GlobalConstants.ERROR_SAVING_DEPARTMENT);
       }
     )
   }

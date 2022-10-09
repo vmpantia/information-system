@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Department } from 'src/app/models/department.model';
 import { ApiService } from 'src/app/services/api.service';
@@ -23,11 +24,11 @@ export class ViewDepComponent implements OnInit {
 
   RefreshDepartmentList(){
     this.api.GetDepartmentList().subscribe(
-      (res:any) => {
-        this.depList = res as Department[]
+      (res) => {
+        this.depList = res as Department[];
       },
-      (err) => {
-        this.errorMessage = err.message
+      (err:HttpErrorResponse) => {
+        this.errorMessage = err.error;
       }
     )
   }

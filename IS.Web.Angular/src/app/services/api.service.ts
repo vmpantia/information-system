@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -13,12 +13,12 @@ export class ApiService {
 
   constructor(private http:HttpClient) { }
 
-  GetDepartmentList():Observable<Department[]>{
-    return this.http.get<Department[]>(GlobalConstants.ISAPIUrl + '/Department/GetDepartmentList');
+  GetDepartmentList():Observable<any>{
+    return this.http.get<any>(GlobalConstants.ISAPIUrl + '/Department/GetDepartmentList');
   }
 
-  GetDepartmentByID(internalID:any):Observable<Department>{
-    return this.http.get<Department>(GlobalConstants.ISAPIUrl + '/Department/GetDepartmentByID/' + internalID);
+  GetDepartmentByID(internalID:any):Observable<any>{
+    return this.http.get<any>(GlobalConstants.ISAPIUrl + '/Department/GetDepartmentByID/' + internalID);
   }
 
   SaveDepartment(model:DepartmentRequestModel){

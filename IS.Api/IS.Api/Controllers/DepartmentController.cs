@@ -17,25 +17,47 @@ namespace IS.Api.Controllers
         }
 
         [HttpGet("GetDepartmentList")]
-        public async Task<JsonResult> GetDepartmentListAsync()
+        public async Task<ActionResult> GetDepartmentListAsync()
         {
-            var setting = new FilterSetting();
-            var result = await _department.GetDepartmentListAsync(setting);
-            return new JsonResult(result);
+            try
+            {
+                var setting = new FilterSetting();
+                var result = await _department.GetDepartmentListAsync(setting);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpGet("GetDepartmentByID/{internalID}")]
-        public async Task<JsonResult> GetDepartmentByIDAsync(Guid internalID)
+        public async Task<ActionResult> GetDepartmentByIDAsync(Guid internalID)
         {
-            var result = await _department.GetDepartmentByIDAsync(internalID);
-            return new JsonResult(result);
+            try
+            {
+                var setting = new FilterSetting();
+                var result = await _department.GetDepartmentByIDAsync(internalID);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         [HttpPost("SaveDepartment")]
-        public async Task<JsonResult> SaveDepartmentAsync(DepartmentRequestModel model)
+        public async Task<ActionResult> SaveDepartmentAsync(DepartmentRequestModel model)
         {
-            var result = await _department.SaveDepartmentAsync(model);
-            return new JsonResult(result);
+            try
+            {
+                var result = await _department.SaveDepartmentAsync(model);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
     }
 }
