@@ -37,6 +37,11 @@ namespace IS.Web.Services
             return result;
         }
 
+        public async Task<bool> IsDepartmentNameExistAsync(string name)
+        {
+            return await _db.Department_MST.AnyAsync(dep => dep.Name == name);
+        }
+
         public async Task<string> SaveDepartmentAsync(DepartmentRequestModel model)
         {
             using (var transaction = await _db.Database.BeginTransactionAsync())

@@ -46,6 +46,20 @@ namespace IS.Api.Controllers
             }
         }
 
+        [HttpGet("IsDepartmentNameExist/{name}")]
+        public async Task<ActionResult> IsDepartmentNameExistAsync(string name)
+        {
+            try 
+            { 
+                var result = await _department.IsDepartmentNameExistAsync(name);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [HttpPost("SaveDepartment")]
         public async Task<ActionResult> SaveDepartmentAsync(DepartmentRequestModel model)
         {

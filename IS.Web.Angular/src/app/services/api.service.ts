@@ -21,6 +21,10 @@ export class ApiService {
     return this.http.get<any>(GlobalConstants.ISAPIUrl + '/Department/GetDepartmentByID/' + internalID);
   }
 
+  IsDepartmentNameExist(name:string):Observable<any>{
+    return this.http.get<any>(GlobalConstants.ISAPIUrl + '/Department/IsDepartmentNameExist/' + name);
+  }
+
   SaveDepartment(model:DepartmentRequestModel){
     return this.http.post(GlobalConstants.ISAPIUrl + '/Department/SaveDepartment', model);
   }

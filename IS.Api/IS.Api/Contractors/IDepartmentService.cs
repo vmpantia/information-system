@@ -8,6 +8,7 @@ namespace IS.Web.Contractors
         Task<IEnumerable<Department_MST>> GetDepartmentListAsync(FilterSetting setting);
         Task<int> GetDepartmentsCountAsync();
         Task<Department_MST> GetDepartmentByIDAsync(Guid internalID);
+        Task<bool> IsDepartmentNameExistAsync(string name);
         Task<string> SaveDepartmentAsync(DepartmentRequestModel model);
     }
 }
