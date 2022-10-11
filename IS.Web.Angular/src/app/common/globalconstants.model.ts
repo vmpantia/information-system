@@ -15,11 +15,6 @@ export class GlobalConstants {
     public static SUCCESS_SAVE_TRANSACTION_TITLE = "Save Successfully";
     public static SUCCESS_SAVE_TRANSACTION_TEXT = "Your transaction has been saved in our database";
 
-    public static ERROR_NO_CHANGES = "No changes made";
-    public static ERROR_DEPARTMENT_NAME_REQUIRED = "Department Name is Required";
-    public static ERROR_DEPARTMENT_NAME_EXIST = "Department Name is already Exist";
-    public static ERROR_DEPARTMENT_MANAGER_REQUIRED = "Select Manager is Required";
-
     public static COLOR_BLUE   = "#3085d6";
     public static COLOR_RED    = "#d33";
 }

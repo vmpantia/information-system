@@ -40,7 +40,7 @@ namespace IS.Api.Services
             return result;
         }
 
-        public async Task<string> SaveDepartmentAsync(DepartmentRequestModel model)
+        public async Task SaveDepartmentAsync(DepartmentRequestModel model)
         {
             using (var transaction = await _db.Database.BeginTransactionAsync())
             {
@@ -69,8 +69,6 @@ namespace IS.Api.Services
                     //Insert Transaction
                     await InsertTransactionAsync(model, request.RequestID);
                     await transaction.CommitAsync();
-
-                    return request.RequestID;
                 }
                 catch (Exception ex)
                 {

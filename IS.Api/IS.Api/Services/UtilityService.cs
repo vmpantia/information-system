@@ -18,16 +18,24 @@ namespace IS.Api.Services
             if (model == null)
                 throw new DepartmentException("Department cannot be NULL");
 
+
+            if (model.FunctionID == Constants.FUNCTIONID_DEPARTMENT_CHANGE_ADMIN)
+            {
+                var isChanged = await IsDepartmentChangeAsync(model);
+                if (!isChanged)
+                    throw new DepartmentException("No changes made");
+            }
+
             //Check if Department Name is Empty
             if (string.IsNullOrEmpty(model.department.Name))
-                throw new DepartmentException("Department Name is Required");
+            throw new DepartmentException("Department Name is Required");
 
             //Check if Department Name Length is more than 50 characters
             if (model.department.Name.Length == 50)
                 throw new DepartmentException("Department Name length is more than 50 characters");
 
             //Check if Department Name Exist
-            var isExist = await IsDepartmentExist(model);
+            var isExist = await IsDepartmentExistAsync(model);
             if (isExist)
                 throw new Exception("Department is already exist");
 
@@ -36,7 +44,7 @@ namespace IS.Api.Services
                 throw new DepartmentException("Department Manager is Required");
         }
 
-        private async Task<bool> IsDepartmentExist(DepartmentRequestModel model)
+        private async Task<bool> IsDepartmentExistAsync(DepartmentRequestModel model)
         {
             var result = await _db.Department_MST.Where(data => data.Name == model.department.Name)
                                                  .ToListAsync();
@@ -52,6 +60,17 @@ namespace IS.Api.Services
                     return false;
             }
             return true;
+        }
+
+        private async Task<bool> IsDepartmentChangeAsync(DepartmentRequestModel model)
+        {
+            var result = await _db.Department_MST.FindAsync(model.department.InternalID);
+
+            if (result == null)
+                return false;
+
+            return model.department.Name != result.Name ||
+                   model.department.Manager_InternalID != result.Manager_InternalID;
         }
     }
 }
