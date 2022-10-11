@@ -37,7 +37,7 @@ export class ViewDepComponent implements OnInit {
 
   RefreshDepartmentList(){
     this.api.GetDepartmentList().subscribe(
-      (res) => {
+      (res:any) => {
         this.depList = res as Department[];
       },
       (err:HttpErrorResponse) => {

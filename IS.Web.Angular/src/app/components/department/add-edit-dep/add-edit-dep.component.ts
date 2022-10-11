@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 
 //Icons
 import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-edit-dep',
@@ -54,6 +55,7 @@ export class AddEditDepComponent implements OnInit {
   }
 
   SaveDepartment(){
+    this.errorMessages = new Array();
     this.disableControl = true;
 
     //Initialize Variables
@@ -98,7 +100,7 @@ export class AddEditDepComponent implements OnInit {
     //Save Department Request Model
     this.api.SaveDepartment(depReqModel)
     .subscribe(
-      (response:any) => {
+      (res:any) => {
         Swal.fire({
           title: GlobalConstants.CONFIRM_SAVE_DEPARTMENT_TITLE,
           text: GlobalConstants.CONFIRM_SAVE_DEPARTMENT_TEXT,
@@ -111,7 +113,7 @@ export class AddEditDepComponent implements OnInit {
           if(result.isConfirmed){
             Swal.fire( {
               title: GlobalConstants.SUCCESS_SAVE_TRANSACTION_TITLE, 
-              text: response + GlobalConstants.SUCCESS_SAVE_TRANSACTION_TEXT,
+              text: res + GlobalConstants.SUCCESS_SAVE_TRANSACTION_TEXT,
               icon: "success",
               confirmButtonColor: GlobalConstants.COLOR_BLUE
             }).then(() => {
@@ -121,7 +123,7 @@ export class AddEditDepComponent implements OnInit {
           this.disableControl = false;
         })
       },
-      (err) => {
+      (err:HttpErrorResponse) => {
         this.disableControl = false;
         this.errorMessages.push(GlobalConstants.ERROR_SAVING_DEPARTMENT);
       }
