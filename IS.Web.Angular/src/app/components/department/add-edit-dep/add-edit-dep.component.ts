@@ -85,20 +85,21 @@ export class AddEditDepComponent implements OnInit {
     depReqModel.department = this.newDepInfo;
     depReqModel.client = this.clientInfo;
 
-    //Save Department Request Model
-    this.api.SaveDepartment(depReqModel)
-    .subscribe(
-      (res:any) => {
-        Swal.fire({
-          title: GlobalConstants.CONFIRM_SAVE_DEPARTMENT_TITLE,
-          text: GlobalConstants.CONFIRM_SAVE_DEPARTMENT_TEXT,
-          icon: "warning",
-          confirmButtonText: "Yes",
-          confirmButtonColor: GlobalConstants.COLOR_BLUE,
-          showCancelButton: true,
-          cancelButtonColor: GlobalConstants.COLOR_RED
-        }).then((result) => {
-          if(result.isConfirmed){
+    //Confirmation for Saving Department
+    Swal.fire({
+      title: GlobalConstants.CONFIRM_SAVE_DEPARTMENT_TITLE,
+      text: GlobalConstants.CONFIRM_SAVE_DEPARTMENT_TEXT,
+      icon: "warning",
+      confirmButtonText: "Yes",
+      confirmButtonColor: GlobalConstants.COLOR_BLUE,
+      showCancelButton: true,
+      cancelButtonColor: GlobalConstants.COLOR_RED
+    }).then((result) => {
+      if(result.isConfirmed){
+        //Save Department Request Model
+        this.api.SaveDepartment(depReqModel)
+        .subscribe(
+          (res:any) => {
             Swal.fire( {
               title: GlobalConstants.SUCCESS_SAVE_TRANSACTION_TITLE, 
               text: GlobalConstants.SUCCESS_SAVE_TRANSACTION_TEXT,
@@ -107,14 +108,15 @@ export class AddEditDepComponent implements OnInit {
             }).then(() => {
               this.Reload.emit();
             });
+          },
+          (err:HttpErrorResponse) => {
+            this.errorMessages.push(err.error);
           }
-          this.disableControl = false;
-        })
-      },
-      (err:HttpErrorResponse) => {
-        this.disableControl = false;
-        this.errorMessages.push(err.error);
+        )
       }
-    )
+      this.disableControl = false;
+    })
+
+
   }
 }

@@ -21,9 +21,14 @@
         #endregion
 
         #region Error Message
-        public const string ERROR_DATA_NOT_FOUND = "Data NOT found in the System or Database";
-        public const string ERROR_INVALID_FUNCTIONID = "Invalid FunctionId";
-        public const string ERROR_INVALID_OBJECTS = "The 2 object type doesn't match";
+        public const string ERROR_DATA_NOT_FOUND = "Data NOT found in Database";
+
+        public const string ERROR_DEPARTMENT_NULL = "Department cannot be NULL";
+        public const string ERROR_DEPARTMENT_NO_CHANGES = "No changes made";
+        public const string ERROR_DEPARTMENT_NAME_REQUIRED = "Department Name is Required";
+        public const string ERROR_DEPARTMENT_NAME_LENGTH = "Department Name length is more than 50 characters";
+        public const string ERROR_DEPARTMENT_EXIST = "Department Name is already exist";
+        public const string ERROR_DEPARTMENT_MANAGER_REQUIRED = "Department Manager is Required";
         #endregion
 
         #region Employee FunctionId

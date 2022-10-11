@@ -5,22 +5,24 @@
     </div>
 
     <div class="alert alert-danger" role="alert" *ngIf="errorMessages.length > 0">
-        <span *ngFor="let error of errorMessages">• {{error}}<br></span>
+        <span *ngFor="let error of errorMessages">{{error}}<br></span>
     </div>
 
     <div class="row mb-3">
         <div class="col-12 form-group">
             <label class="form-label">* Department Name:</label>
             <input type="text" class="form-control" placeholder="Enter Department Name" 
-                   [readOnly]="disableControl"
+                   [disabled]="disableControl"
                    [(ngModel)]="newDepInfo.name" />
         </div>
     </div>
     <div class="row mb-3">
         <div class="col-12 form-group">
             <label class="form-label">* Select Manager:</label>
-            <select class="form-select" [(ngModel)]="newDepInfo.manager_InternalID">  
-                    <option value="GlobalConstants.EMPTY_GUID" selected disabled>--Manager--</option>
+            <select class="form-select" 
+                    [disabled]="disableControl"
+                    [(ngModel)]="newDepInfo.manager_InternalID">  
+                    <option value="00000000-0000-0000-0000-000000000000" selected="true"t>Select Manager</option>
                     <option *ngFor = "let manager of managerList" [value]="manager.internalID"> 
                         {{manager.name}}
                     </option>
