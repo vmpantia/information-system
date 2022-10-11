@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Department } from 'src/app/models/department.model';
 import { ApiService } from 'src/app/services/api.service';
 
+//Icons
+import { faBuilding, faFolderPlus, faPenToSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-view-dep',
   templateUrl: './view-dep.component.html',
@@ -12,6 +15,12 @@ export class ViewDepComponent implements OnInit {
 
   constructor(public api:ApiService) { }
   
+  //Icons
+  faBuilding = faBuilding;
+  faFolderPlus = faFolderPlus;
+  faPenToSquare = faPenToSquare;
+  faTrash = faTrash;
+
   depList:Department[];
   depInfo:Department;
   errorMessage:string;

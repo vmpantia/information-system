@@ -22,12 +22,10 @@
 }
 .cstm-side-bar a:hover {
     color: rgba(70,70,70);
-    font-weight: bold;
     background-color: whitesmoke;
 }
-.cstm-side-bar i {
+.cstm-side-bar fa-icon {
     width: 20%;
-    margin-top: 5px;
     text-align: center;
 }
 
@@ -39,7 +37,7 @@
     background-color: whitesmoke;
     color: rgba(70,70,70);
 }
-.cstm-page-title i {
+.cstm-page-title fa-icon {
     padding-right: 5px;
 }
 
@@ -154,4 +152,16 @@
 
 input.invalid{
     border: 1px solid red;
+}
+
+
+/*Bootstrap*/
+
+.modal-title fa-icon {
+    padding-right: 5px;
+}
+
+.btn fa-icon {
+    padding-right: 5px;
+
 }

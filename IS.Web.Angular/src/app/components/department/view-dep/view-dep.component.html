@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row mb-4">
        <div class="cstm-page-title">
-           <i class="fa-solid fa-building"></i>
+            <fa-icon [icon]="faBuilding"></fa-icon>
            DEPARTMENT
        </div>
     </div>
@@ -13,7 +13,8 @@
                     data-toggle="modal" data-target="#departmentModal"
                     data-backdrop="static" data-keyboard="false"
                     (click)="AddDepartment()">
-                    Add Department
+                    <fa-icon [icon]="faFolderPlus"></fa-icon>
+                    Add
             </button>
         </div>
         <div class="col-4">
@@ -26,7 +27,10 @@
         <div class="modal-dialog">
             <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="departmentModalLabel">{{modalTitle}}</h5>
+                <h5 class="modal-title" id="departmentModalLabel">
+                    <fa-icon [icon]="faBuilding"></fa-icon>
+                    {{modalTitle}}
+                </h5>
                 <button type="button" class="close" 
                         data-dismiss="modal" aria-label="Close" 
                         (click)="CloseDepartmentForm()"> 
@@ -74,9 +78,13 @@
                                 data-toggle="modal" data-target="#departmentModal"
                                 data-backdrop="static" data-keyboard="false"
                                 (click)="EditDepartment(data)">
+                                <fa-icon [icon]="faPenToSquare"></fa-icon>
                                 Edit
                         </button> &nbsp;
-                        <button type="button" class="btn btn-danger btn-sm">Delete</button>
+                        <button type="button" class="btn btn-danger btn-sm">
+                                <fa-icon [icon]="faTrash"></fa-icon>
+                                Delete
+                        </button>
                     </td>
 
                     <td>{{data.name}}</td>

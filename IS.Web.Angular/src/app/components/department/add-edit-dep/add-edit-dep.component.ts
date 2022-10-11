@@ -7,6 +7,9 @@ import { ApiService } from 'src/app/services/api.service';
 import { UtilityService } from 'src/app/services/utility.service';
 import Swal from 'sweetalert2';
 
+//Icons
+import { faFloppyDisk } from '@fortawesome/free-solid-svg-icons';
+
 @Component({
   selector: 'app-add-edit-dep',
   templateUrl: './add-edit-dep.component.html',
@@ -16,7 +19,10 @@ export class AddEditDepComponent implements OnInit {
 
   constructor(private api:ApiService,
               private utility:UtilityService) { }
-
+              
+  //Icons
+  faFloppyDisk = faFloppyDisk;
+  
   @Input()depInfo:Department;
   @Output()Reload = new EventEmitter();
 
