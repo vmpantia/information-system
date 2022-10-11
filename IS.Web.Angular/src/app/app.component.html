@@ -10,19 +10,19 @@
   <div class="cstm-side-bar">
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a asp-controller="Dashboard" asp-action="Index"><fa-icon [icon]="faGauge"></fa-icon>Dashboard</a>
+          <a routerLink="department"><fa-icon [icon]="faGauge"></fa-icon>Dashboard</a>
         </li>
         <li class="nav-item">
-          <a asp-controller="Dashboard" asp-action="Index"><fa-icon [icon]="faCodePullRequest"></fa-icon>Request</a>
+          <a routerLink="department"><fa-icon [icon]="faCodePullRequest"></fa-icon>Request</a>
         </li>
         <li class="nav-item">
-          <a asp-controller="Dashboard" asp-action="Index"><fa-icon [icon]="faUser"></fa-icon>Employee</a>
+          <a routerLink="employee"><fa-icon [icon]="faUser"></fa-icon>Employee</a>
         </li>
         <li class="nav-item">
           <a routerLink="department"><fa-icon [icon]="faBuilding"></fa-icon>Department</a>
         </li>
         <li class="nav-item">
-          <a asp-controller="Dashboard" asp-action="Index"><fa-icon [icon]="faLocationDot"></fa-icon>Position</a>
+          <a routerLink="department"><fa-icon [icon]="faLocationDot"></fa-icon>Position</a>
         </li>
       </ul>
   </div>
