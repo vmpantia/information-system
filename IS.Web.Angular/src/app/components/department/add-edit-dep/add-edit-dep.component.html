@@ -13,14 +13,17 @@
             <label class="form-label">* Department Name:</label>
             <input type="text" class="form-control" placeholder="Enter Department Name" 
                    [readOnly]="disableControl"
-                   [(ngModel)]="newDepInfo.name" />
+                   ng-model="newDepInfo.name" />
         </div>
     </div>
     <div class="row mb-3">
         <div class="col-12 form-group">
             <label class="form-label">* Select Manager:</label>
-            <select class="form-select" 
-                    [(ngModel)]="newDepInfo.manager_InternalID" >  
+            <select class="form-select" ng-model="newDepInfo.manager_internalID">  
+                    <option value="" selected disabled>--Manager--</option>
+                    <option *ngFor = "let manager of managerList" [value]="manager.internalID"> 
+                        {{manager.name}}
+                    </option>
             </select>  
         </div>
     </div>

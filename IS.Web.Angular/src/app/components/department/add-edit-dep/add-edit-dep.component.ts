@@ -1,8 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+
+//Models
 import { GlobalConstants } from 'src/app/common/globalconstants.model';
 import { Department } from 'src/app/models/department.model';
 import { DepartmentRequestModel } from 'src/app/models/requestmodels/departmentrequestmodel';
 import { ClientInformation } from 'src/app/models/clientinformation';
+
+//Services
 import { ApiService } from 'src/app/services/api.service';
 import { UtilityService } from 'src/app/services/utility.service';
 import Swal from 'sweetalert2';
@@ -32,6 +36,8 @@ export class AddEditDepComponent implements OnInit {
   newDepInfo:Department = new Department();
   clientInfo:ClientInformation = new ClientInformation();
 
+  managerList:any[];
+
   ngOnInit(): void {;
     this.newDepInfo.internalID = this.depInfo.internalID;
     this.newDepInfo.name = this.depInfo.name;
@@ -39,6 +45,12 @@ export class AddEditDepComponent implements OnInit {
     this.newDepInfo.status = this.depInfo.status;
     this.newDepInfo.createdDate = this.depInfo.createdDate;
     this.newDepInfo.modifiedDate = this.depInfo.modifiedDate;
+    
+    this.managerList = [  
+      {internalID : "45261be5-1029-4dda-8fbb-84c407c38a83", name : "Vincent Pogi"},  
+      {internalID : "44474bf3-fa3c-4ff7-905f-586d7ee904e6", name : "Vincent Handsome"},  
+      {internalID : "2ea87b71-1c27-4d47-b0c5-cd7312d51ffe", name : "Vincent Wala lang"}  
+    ];  
   }
 
   SaveDepartment(){

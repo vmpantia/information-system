@@ -1,6 +1,10 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+
+//Models
 import { Department } from 'src/app/models/department.model';
+
+//Services
 import { ApiService } from 'src/app/services/api.service';
 
 //Icons
