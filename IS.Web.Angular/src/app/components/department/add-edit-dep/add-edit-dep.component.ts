@@ -55,6 +55,7 @@ export class AddEditDepComponent implements OnInit {
   }
 
   SaveDepartment(){
+    //Reset Error Messages
     this.errorMessages = new Array();
     this.disableControl = true;
 
@@ -70,22 +71,9 @@ export class AddEditDepComponent implements OnInit {
 
     //Validate New Department Info
     if(isNew)
-    {
       this.newDepInfo.createdDate = new Date();
-      this.errorMessages = this.utility.ValidateDepartment(this.newDepInfo, isNew);
-    }
     else
-    {
       this.newDepInfo.modifiedDate = new Date();
-      this.errorMessages = this.utility.ValidateDepartment(this.newDepInfo, isNew, this.depInfo);
-    }
-    
-    //Check if there's a error
-    if(this.errorMessages.length > 0)
-    {
-      this.disableControl = false;
-      return;
-    }
 
     //Prepare Variables
     this.clientInfo.name = "Vincent";

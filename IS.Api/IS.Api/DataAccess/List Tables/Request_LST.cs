@@ -7,10 +7,8 @@ namespace IS.Api.DataAccess
         [Key]
         [MaxLength(15)]
         public string RequestID { get; set; }
-        [Required]
         [MaxLength(5)]
         public string FunctionID { get; set; }
-        [Required]
         [MaxLength(2)]
         public string Status { get; set; }
         public Guid? ApprovedBy { get; set; }

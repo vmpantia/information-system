@@ -7,7 +7,6 @@ namespace IS.Api.DataAccess
     {
         [Key]
         public Guid InternalID { get; set; }
-        [Required]
         [MaxLength(50)]
         public string Name { get; set; }
         public Guid Department_InternalID { get; set; }

@@ -2,6 +2,7 @@
 using IS.Api.DataAccess;
 using IS.Api.Models;
 using IS.Api.Contractors;
+using Microsoft.EntityFrameworkCore;
 
 namespace IS.Api.Services
 {
@@ -18,7 +19,7 @@ namespace IS.Api.Services
                 throw new DepartmentException("Department cannot be NULL");
 
             //Check if Department Name is Empty
-            if (model.department.Name == null)
+            if (string.IsNullOrEmpty(model.department.Name))
                 throw new DepartmentException("Department Name is Required");
 
             //Check if Department Name Length is more than 50 characters
@@ -37,8 +38,9 @@ namespace IS.Api.Services
 
         private async Task<bool> IsDepartmentExist(DepartmentRequestModel model)
         {
-            var result = await _db.Department_MST.FindAsync(model.department.Name);
-            if (result == null)
+            var result = await _db.Department_MST.Where(data => data.Name == model.department.Name)
+                                                 .ToListAsync();
+            if (result == null || result.Count == 0)
                 return false;
 
             //If functionID is Changed

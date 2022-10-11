@@ -8,7 +8,6 @@ namespace IS.Api.DataAccess
         [MaxLength(15)]
         public string RequestID { get; set; }
         public Guid InternalID { get; set; }
-        [Required]
         [MaxLength(50)]
         public string Name { get; set; }
         public Guid Manager_InternalID { get; set; }
