@@ -1,5 +1,5 @@
-﻿using IS.Web.Contractors;
-using IS.Web.Models;
+﻿using IS.Api.Contractors;
+using IS.Api.Models;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -46,32 +46,19 @@ namespace IS.Api.Controllers
             }
         }
 
-        [HttpGet("IsDepartmentNameExist/{name}")]
-        public async Task<ActionResult> IsDepartmentNameExistAsync(string name)
-        {
-            try 
-            { 
-                var result = await _department.IsDepartmentNameExistAsync(name);
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-        }
-
         [HttpPost("SaveDepartment")]
         public async Task<ActionResult> SaveDepartmentAsync(DepartmentRequestModel model)
         {
             try
             {
-                var result = await _department.SaveDepartmentAsync(model);
-                return Ok(result);
+                await _department.SaveDepartmentAsync(model);
+                return Ok();
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
+
         }
     }
 }

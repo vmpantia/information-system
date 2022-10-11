@@ -1,6 +1,6 @@
-using IS.Web.Contractors;
-using IS.Web.DataAccess;
-using IS.Web.Services;
+using IS.Api.Contractors;
+using IS.Api.DataAccess;
+using IS.Api.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +11,7 @@ builder.Services.AddDbContext<ISDbContext>(options => options.UseSqlServer(conne
 
 builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 builder.Services.AddScoped<IRequestService, RequestService>();
+builder.Services.AddScoped<IUtilityService, UtilityService>();
 
 builder.Services.AddCors(options =>
 {

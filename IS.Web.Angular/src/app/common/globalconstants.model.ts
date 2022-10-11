@@ -13,9 +13,8 @@ export class GlobalConstants {
     public static CONFIRM_SAVE_DEPARTMENT_TEXT = "Are you sure you want to save this record?";
 
     public static SUCCESS_SAVE_TRANSACTION_TITLE = "Save Successfully";
-    public static SUCCESS_SAVE_TRANSACTION_TEXT = " is your Request ID for your transaction.";
+    public static SUCCESS_SAVE_TRANSACTION_TEXT = "Your transaction has been saved in our database";
 
-    public static ERROR_SAVING_DEPARTMENT = "Error in Saving Department, Please try again.";
     public static ERROR_NO_CHANGES = "No changes made";
     public static ERROR_DEPARTMENT_NAME_REQUIRED = "Department Name is Required";
     public static ERROR_DEPARTMENT_NAME_EXIST = "Department Name is already Exist";

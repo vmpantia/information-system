@@ -1,14 +1,13 @@
-﻿using IS.Web.DataAccess;
-using IS.Web.Models;
+﻿using IS.Api.DataAccess;
+using IS.Api.Models;
 
-namespace IS.Web.Contractors
+namespace IS.Api.Contractors
 {
     public interface IDepartmentService
     {
         Task<IEnumerable<Department_MST>> GetDepartmentListAsync(FilterSetting setting);
         Task<int> GetDepartmentsCountAsync();
         Task<Department_MST> GetDepartmentByIDAsync(Guid internalID);
-        Task<bool> IsDepartmentNameExistAsync(string name);
         Task<string> SaveDepartmentAsync(DepartmentRequestModel model);
     }
 }

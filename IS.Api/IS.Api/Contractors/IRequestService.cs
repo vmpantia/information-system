@@ -1,6 +1,6 @@
-﻿using IS.Web.DataAccess;
+﻿using IS.Api.DataAccess;
 
-namespace IS.Web.Contractors
+namespace IS.Api.Contractors
 {
     public interface IRequestService
     {

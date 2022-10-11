@@ -1,18 +1,21 @@
-﻿using IS.Web.Contractors;
-using IS.Web.DataAccess;
-using IS.Web.Models;
+﻿using IS.Api.Contractors;
+using IS.Api.Contractors;
+using IS.Api.DataAccess;
+using IS.Api.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace IS.Web.Services
+namespace IS.Api.Services
 {
     public class DepartmentService : IDepartmentService
     {
         private readonly IRequestService _request;
+        private readonly IUtilityService _utility;
         private readonly ISDbContext _db;
-        public DepartmentService(IRequestService request, ISDbContext dbContext)
+        public DepartmentService(IRequestService request, IUtilityService utility, ISDbContext dbContext)
         {
             _request = request;
+            _utility = utility;
             _db = dbContext;
         }
 
@@ -37,17 +40,14 @@ namespace IS.Web.Services
             return result;
         }
 
-        public async Task<bool> IsDepartmentNameExistAsync(string name)
-        {
-            return await _db.Department_MST.AnyAsync(dep => dep.Name == name);
-        }
-
         public async Task<string> SaveDepartmentAsync(DepartmentRequestModel model)
         {
             using (var transaction = await _db.Database.BeginTransactionAsync())
             {
                 try
                 {
+                    await _utility.ValidateDepartment(model);
+
                     //Insert Request
                     var request = await _request.InsertAsync(_db, 
                                                              model.client.UserID, 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace IS.Web.DataAccess
+namespace IS.Api.DataAccess
 {
     public class ISDbContext : DbContext
     {

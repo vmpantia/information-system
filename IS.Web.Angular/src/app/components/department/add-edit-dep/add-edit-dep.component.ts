@@ -113,7 +113,7 @@ export class AddEditDepComponent implements OnInit {
           if(result.isConfirmed){
             Swal.fire( {
               title: GlobalConstants.SUCCESS_SAVE_TRANSACTION_TITLE, 
-              text: res + GlobalConstants.SUCCESS_SAVE_TRANSACTION_TEXT,
+              text: GlobalConstants.SUCCESS_SAVE_TRANSACTION_TEXT,
               icon: "success",
               confirmButtonColor: GlobalConstants.COLOR_BLUE
             }).then(() => {
@@ -125,7 +125,7 @@ export class AddEditDepComponent implements OnInit {
       },
       (err:HttpErrorResponse) => {
         this.disableControl = false;
-        this.errorMessages.push(GlobalConstants.ERROR_SAVING_DEPARTMENT);
+        this.errorMessages.push(err.error);
       }
     )
   }

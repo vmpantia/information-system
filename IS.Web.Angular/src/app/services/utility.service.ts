@@ -32,26 +32,12 @@ export class UtilityService {
       errorMessages.push(GlobalConstants.ERROR_DEPARTMENT_NAME_REQUIRED);
     }
 
-    //Check if Manager is Empty
-    if(newDepInfo.manager_InternalID === GlobalConstants.EMPTY_GUID)
+    //Check if Department Manager is Empty
+    if(newDepInfo.manager_InternalID === GlobalConstants.EMPTY_STRING || 
+       newDepInfo.manager_InternalID === GlobalConstants.EMPTY_GUID)
     {
-      errorMessages.push(GlobalConstants.ERROR_DEPARTMENT_MANAGER_REQUIRED);
+       errorMessages.push(GlobalConstants.ERROR_DEPARTMENT_MANAGER_REQUIRED);
     }
-    
-    //Check if Department Name is Exist
-    this.api.IsDepartmentNameExist(newDepInfo.name).subscribe(
-      (res) => {
-        let isExist = res as boolean;
-        if((isNew && isExist) || 
-           (!isNew && isExist && newDepInfo.name !== oldDepInfo.name))
-        {
-          errorMessages.push(GlobalConstants.ERROR_DEPARTMENT_NAME_EXIST);
-        }
-      },
-      (err:HttpErrorResponse) => {
-        errorMessages.push(err.error);
-      }
-    );
 
     return errorMessages;
   }

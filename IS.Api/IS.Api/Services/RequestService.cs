@@ -1,10 +1,10 @@
-﻿using IS.Web.Contractors;
-using IS.Web.DataAccess;
-using IS.Web.Models;
+﻿using IS.Api.Contractors;
+using IS.Api.DataAccess;
+using IS.Api.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace IS.Web.Services
+namespace IS.Api.Services
 {
     public class RequestService : IRequestService
     {

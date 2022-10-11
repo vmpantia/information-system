@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace IS.Web.DataAccess
+namespace IS.Api.DataAccess
 {
     public class Position_TRN
     {

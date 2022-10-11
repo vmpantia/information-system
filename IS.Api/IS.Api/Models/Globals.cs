@@ -1,4 +1,4 @@
-﻿namespace IS.Web.Models
+﻿namespace IS.Api.Models
 {
     public static class Globals
     {
