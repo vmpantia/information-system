@@ -20,4 +20,10 @@
     <Folder Include="Models\enums\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="IS.Logger">
+      <HintPath>..\..\IS.Common\IS.Logger\bin\Release\net6.0\IS.Logger.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

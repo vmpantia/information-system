@@ -21,7 +21,8 @@ namespace IS.Logger
             await File.AppendAllTextAsync(_filePath,
                                           string.Concat(dateTime,
                                                         "     INFO     ",
-                                                        message));
+                                                        message,
+                                                        Globals.NEWLINE));
         }
 
         public async Task WriteWarnLog(string message)
@@ -31,7 +32,8 @@ namespace IS.Logger
             await File.AppendAllTextAsync(_filePath,
                                           string.Concat(dateTime,
                                                         "     WARN     ",
-                                                        message));
+                                                        message,
+                                                        Globals.NEWLINE));
         }
 
         public async Task WriteErrorLog(string message, Exception exception)
@@ -43,7 +45,8 @@ namespace IS.Logger
                                                         "     ERROR     ",
                                                         message,
                                                         Globals.NEWLINE,
-                                                        exception.ToString()));
+                                                        exception.ToString(),
+                                                        Globals.NEWLINE));
         }
     }
 }
