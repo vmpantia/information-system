@@ -1,6 +1,6 @@
-using IS.Web.Contractor;
+using IS.Web.Contractors;
 using IS.Web.DataAccess;
-using IS.Web.Repository;
+using IS.Web.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +11,8 @@ builder.Services.AddControllersWithViews();
 var connectionString = builder.Configuration.GetConnectionString("DEV_SQL_CON");
 builder.Services.AddDbContext<ISDbContext>(options => options.UseSqlServer(connectionString));
 
-builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+builder.Services.AddScoped<IRequestService, RequestService>();
 
 var app = builder.Build();
 

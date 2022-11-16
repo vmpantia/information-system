@@ -1,0 +1,43 @@
+<div class="container-fluid">
+
+    <div class="alert alert-warning" role="alert">
+       Field with <b>Asterisk(*)</b>  are Required.
+    </div>
+
+    <div class="alert alert-danger" role="alert" *ngIf="errorMessages.length > 0">
+        <span *ngFor="let error of errorMessages">{{error}}<br></span>
+    </div>
+
+    <div class="row mb-3">
+        <div class="col-12 form-group">
+            <label class="form-label">* Department Name:</label>
+            <input type="text" class="form-control" placeholder="Enter Department Name" 
+                   [disabled]="disableControl"
+                   [(ngModel)]="newDepInfo.name" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12 form-group">
+            <label class="form-label">* Select Manager:</label>
+            <select class="form-select" 
+                    [disabled]="disableControl"
+                    [(ngModel)]="newDepInfo.manager_InternalID">  
+                    <option value="00000000-0000-0000-0000-000000000000" selected="true"t>Select Manager</option>
+                    <option *ngFor = "let manager of managerList" [value]="manager.internalID"> 
+                        {{manager.name}}
+                    </option>
+            </select>  
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12">
+            <button class="btn btn-success"
+                    [disabled]="disableControl"
+                    (click)="SaveDepartment()">
+                    <fa-icon [icon]="faFloppyDisk"></fa-icon>
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    Save
+            </button>
+        </div>
+    </div>
+</div>

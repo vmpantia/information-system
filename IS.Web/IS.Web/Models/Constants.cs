@@ -17,11 +17,11 @@
         #endregion
 
         #region Request Status
-        public const string REQUEST_STATUS_A2 = "A2";
+        public const string REQUEST_STATUS_COMPLETED = "A2";
         #endregion
 
         #region Error Message
-        public const string ERROR_DATA_NOT_FOUND = "Data can't be found in the System or Database";
+        public const string ERROR_DATA_NOT_FOUND = "Data NOT found in the System or Database";
         public const string ERROR_INVALID_FUNCTIONID = "Invalid FunctionId";
         public const string ERROR_INVALID_OBJECTS = "The 2 object type doesn't match";
         #endregion
@@ -64,7 +64,5 @@
         public const string FUNCTIONID_POSITION_CHANGE_ADMIN   = "02C01";
         public const string FUNCTIONID_POSITION_DELETE_ADMIN   = "02D01";
         #endregion
-
-
     }
 }

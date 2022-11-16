@@ -9,9 +9,9 @@ namespace IS.Web.DataAccess
         [Key]
         [MaxLength(15)]
         public string RequestID { get; set; }
-        public Guid InternalId { get; set; }
+        public Guid InternalID { get; set; }
         public string Name { get; set; }
-        public Guid Manager_InternalId { get; set; }
+        public Guid Manager_InternalID { get; set; }
         public int Status { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? ModifiedDate { get; set; }

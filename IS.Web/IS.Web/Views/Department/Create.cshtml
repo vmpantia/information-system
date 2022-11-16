@@ -14,33 +14,36 @@
 
     <form asp-action="Save" method="post">
         <input asp-for="FunctionID" type="hidden"/>
-        <input asp-for="newDepartment.InternalID" type="hidden"/>
+        <input asp-for="InternalID" type="hidden"/>
         <div class="cstm-divider-title">
             <span>DEPARTMENT INFORMATION</span>
         </div>
-        <div class="row mb-2">
-            <div class="col-12 col-md-4 mb-3 form-group">
-                <label asp-for="newDepartment.Name" class="form-label">* Department Name:</label>
-                <input asp-for="newDepartment.Name" type="text" class="form-control" placeholder="Department Name" />
-                <span asp-validation-for="newDepartment.Name" class="text-danger"></span>
-            </div>
-            <div class="col-12 col-md-4 mb-3 form-group">
-                <label asp-for="newDepartment.Manager_InternalID" class="form-label">* Select Manager:</label>
-                <select asp-for="newDepartment.Manager_InternalID" class="form-select"
-                        asp-items="@(new SelectList(Model.ManagerList, "Value", "Text"))">
-                </select>
-                <span asp-validation-for="newDepartment.Manager_InternalID" class="text-danger"></span>
+        <div class="row mb-3">
+            <div class="col-12 col-sm-8 col-lg-4 form-group">
+                <label asp-for="Name" class="form-label">Department Name:</label>
+                <input asp-for="Name" type="text" class="form-control" placeholder="Department Name" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
         </div>
 
-        <div class="row mb-2">
+        <div class="row mb-3">
+            <div class="col-12 col-sm-8 col-lg-4 form-group">
+                <label asp-for="Manager_InternalID" class="form-label">Select Manager:</label>
+                <select asp-for="Manager_InternalID" class="form-select"
+                        asp-items="@(new SelectList(Model.ManagerList, "Value", "Text"))">
+                </select>
+                <span asp-validation-for="Manager_InternalID" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="row mb-3">
             <div class="col-12">
                 <button type="submit" class="btn btn-success"><i class="fa-solid fa-floppy-disk"></i>&nbsp;Save</button>
                 <a asp-action="Index" class="btn btn-secondary"><i class="fa-solid fa-xmark"></i>&nbsp;Cancel</a>
             </div>
         </div>
-        <input asp-for="newDepartment.Status" type="hidden"/>
-        <input asp-for="newDepartment.CreatedDate" type="hidden"/>
-        <input asp-for="newDepartment.ModifiedDate" type="hidden"/>
+        <input asp-for="Status" type="hidden"/>
+        <input asp-for="CreatedDate" type="hidden"/>
+        <input asp-for="ModifiedDate" type="hidden"/>
     </form>
 </div>

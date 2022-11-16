@@ -22,7 +22,7 @@ namespace IS.Web.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("IS.Web.DataAccess.Department", b =>
+            modelBuilder.Entity("IS.Web.DataAccess.Department_MST", b =>
                 {
                     b.Property<Guid>("InternalID")
                         .ValueGeneratedOnAdd()
@@ -39,15 +39,14 @@ namespace IS.Web.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.HasKey("InternalID");
 
-                    b.ToTable("Department");
+                    b.ToTable("Department_MST");
                 });
 
             modelBuilder.Entity("IS.Web.DataAccess.Department_TRN", b =>
@@ -59,10 +58,10 @@ namespace IS.Web.Migrations
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("InternalId")
+                    b.Property<Guid>("InternalID")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Manager_InternalId")
+                    b.Property<Guid>("Manager_InternalID")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("ModifiedDate")
@@ -80,7 +79,7 @@ namespace IS.Web.Migrations
                     b.ToTable("Department_TRN");
                 });
 
-            modelBuilder.Entity("IS.Web.DataAccess.Position", b =>
+            modelBuilder.Entity("IS.Web.DataAccess.Position_MST", b =>
                 {
                     b.Property<Guid>("InternalID")
                         .ValueGeneratedOnAdd()
@@ -97,30 +96,29 @@ namespace IS.Web.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.HasKey("InternalID");
 
-                    b.ToTable("Position");
+                    b.ToTable("Position_MST");
                 });
 
             modelBuilder.Entity("IS.Web.DataAccess.Position_TRN", b =>
                 {
-                    b.Property<string>("RequestId")
+                    b.Property<string>("RequestID")
                         .HasMaxLength(15)
                         .HasColumnType("nvarchar(15)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("Department_InternalId")
+                    b.Property<Guid>("Department_InternalID")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("InternalId")
+                    b.Property<Guid>("InternalID")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime?>("ModifiedDate")
@@ -133,16 +131,15 @@ namespace IS.Web.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.HasKey("RequestId");
+                    b.HasKey("RequestID");
 
                     b.ToTable("Position_TRN");
                 });
 
-            modelBuilder.Entity("IS.Web.DataAccess.Request", b =>
+            modelBuilder.Entity("IS.Web.DataAccess.Request_LST", b =>
                 {
                     b.Property<string>("RequestID")
-                        .HasMaxLength(15)
-                        .HasColumnType("nvarchar(15)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<Guid?>("ApprovedBy")
                         .HasColumnType("uniqueidentifier");
@@ -158,8 +155,7 @@ namespace IS.Web.Migrations
 
                     b.Property<string>("FunctionID")
                         .IsRequired()
-                        .HasMaxLength(5)
-                        .HasColumnType("nvarchar(5)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("ModifiedBy")
                         .HasColumnType("uniqueidentifier");
@@ -169,12 +165,11 @@ namespace IS.Web.Migrations
 
                     b.Property<string>("Status")
                         .IsRequired()
-                        .HasMaxLength(2)
-                        .HasColumnType("nvarchar(2)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RequestID");
 
-                    b.ToTable("Request");
+                    b.ToTable("Request_LST");
                 });
 #pragma warning restore 612, 618
         }
